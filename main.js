@@ -13,8 +13,12 @@ let taskList = []
 addButton.addEventListener("click",addTask);
 
 function addTask(){
-    let taskContent = taskInput.value;
-    taskList.push(taskContent);
+    let task = {
+        id :randomIDGenerator(),
+        taskContent : taskInput.value,
+        isComplete : false
+    }
+    taskList.push(task);
     console.log(taskList);
     render();
 }
@@ -22,15 +26,46 @@ function addTask(){
 function render(){
     let resultHTML = ''
     for(let i=0;i<taskList.length;i++){
-        resultHTML += `<div class="task">
-                    <div>
-                        ${taskList[i]}
+        if(taskList[i].isComplete == true){
+            resultHTML += `<div class="task">
+                    <div class="task-done">
+                        ${taskList[i].taskContent}
                     </div>
                     <div>
-                        <button>Check</button>
-                        <button>Delete</button>
+                        <button onclick="toggleComplete('${taskList[i].id}')">Check</button>
+                        <button onclick="deleteTask()">Delete</button>
                     </div>
                 </div>`
+        } else {resultHTML += `<div class="task">
+            <div>
+                ${taskList[i].taskContent}
+            </div>
+            <div>
+                <button onclick="toggleComplete('${taskList[i].id}')">Check</button>
+                <button onclick="deleteTask()">Delete</button>
+            </div>
+        </div>`
+    }
+
     }
     document.getElementById("task-board").innerHTML = resultHTML;
+}
+
+function toggleComplete(id){
+    for(i=0;i<taskList.length;i++){
+        if(taskList[i].id == id){
+            taskList[i].isComplete = !taskList[i].isComplete
+            }
+            break; // 굳이 찾을 필요 없음.   
+        }
+        render()
+        // console.log(taskList)
+}
+
+function deleteTask(){
+    console.log("삭제")
+}
+
+function randomIDGenerator(){
+    return '_' + Math.random().toString(36).substr(2, 9);
 }
