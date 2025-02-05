@@ -40,9 +40,40 @@ body {
 .task {
     display: flex;
     justify-content: space-between;
+    /* position: relative; */
+}
+
+.task-size {
     padding: 1em;
 }
 
 .task-done {
     text-decoration: line-through;
+    background-color: lightgray;
+}
+
+.button-box {
+    display: flex;
+}
+
+
+.button-box button{
+    height: 100%;
+    width: 4em;
+    margin: 0;
+    border: none;
+    background-color: white;
+    transition: 0.5s;
+}
+
+.fa-check {
+    color:limegreen
+}
+
+.fa-trash-can {
+    color: red;
+}
+
+.fa-rotate-right {
+    color: lightslategray;
 }
