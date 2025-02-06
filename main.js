@@ -21,6 +21,11 @@ for(let i=1 ; i < tabs.length ; i++) {
 }
 
 addButton.addEventListener("click",addTask);
+taskInput.addEventListener("keydown",function(e){
+    if(e.key === "Enter") {
+        addTask(e)
+    }
+})
 
 function addTask(){
     if(taskInput.value == ''){
