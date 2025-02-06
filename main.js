@@ -13,6 +13,9 @@ let taskList = []
 let mode = "all" //전역변수수
 let filterList = []
 
+let underLine = document.getElementById("under-line")
+
+
 for(let i=1 ; i < tabs.length ; i++) {
     tabs[i].addEventListener("click", function(event){filter(event)})
 }
@@ -20,13 +23,17 @@ for(let i=1 ; i < tabs.length ; i++) {
 addButton.addEventListener("click",addTask);
 
 function addTask(){
+    if(taskInput.value == ''){
+        alert("입력바랍니다.")
+    } else {
     let task = {
         id :randomIDGenerator(),
         taskContent : taskInput.value,
         isComplete : false
     }
     taskList.push(task);
-    render();
+    filter();
+}
 }
 
 function render(){
@@ -83,16 +90,20 @@ function deleteTask(id){
     filter()
 }
 
-function filter(e){
-    if(e){
-        mode = e.target.id;
+function filter(event){
+    if(event){
+        mode = event.target.id;
+        underLine.style.width = event.target.offsetWidth + "px";
+        underLine.style.left = event.target.offsetLeft + "px";
+        underLine.style.top =
+        event.target.offsetTop + (event.target.offsetHeight - 4) + "px";
     }
 
     filterList = [] ;
     if(mode === "all" ){
     } else if(mode === "ongoing") {
         for(let i = 0;i < taskList.length;i++){
-            if(taskList[i].isComplete === false) {
+            if(taskList[i].isComplete === false) { 
                 filterList.push(taskList[i]);
             }
         }
