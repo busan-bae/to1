@@ -25,6 +25,7 @@ body {
 /* box size 키울때 */
 .task-tabs div { 
     padding : 1em;
+    cursor: pointer;
 }
 
 #under-line { 
